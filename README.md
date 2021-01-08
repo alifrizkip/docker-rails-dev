@@ -2,17 +2,24 @@
 
 - clone & enter to directory
 - `docker-compose up`
-- `docker-compose exec web bash`
+- open new terminal -> `docker-compose exec web bash`
 
 inside container:
-- `rails new . --force --database=postgresql`
-- `bundle exec rake db:create`
-- `exit`
+- `rails new . --force --database=postgresql` *README.md will be overwritten by rails
 
 inside host machine:
 - `sudo chown -R $USER:$USER .`
 - `sudo chmod -Rf 777 .`
-- `docker-compose exec web bash`
 
 inside container:
+- setup database connection at config/database.yml
+```
+  username: postgres
+  password: password
+  host: db
+```
+- `bundle exec rake db:create`
 - `bundle exec rails s -p 3000 -b '0.0.0.0'`
+- `exit`
+
+- open browser http://localhost:3000
